@@ -1,4 +1,6 @@
 import "../css/App.css";
+import React from 'react';
+import Card from './Card';
 
 const user = {
   name: "Vladilen",
@@ -12,6 +14,7 @@ function App(user) {
       <h1>
         {`Hello, ${user.name}, hello ${user.lastname}!`}
       </h1>
+      <Card />
     </div>
   );
 }

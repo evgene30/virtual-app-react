@@ -3,20 +3,21 @@ import React from 'react';
 import Card from './Card';
 
 const user = {
-  name: "Vladilen",
-  lastname: "Minin",
+    name: "Vladilen",
+    lastname: "Minin",
 };
 
-const Elem = App(user);
+const Apps = App(user);
+
 function App(user) {
-  return (
-    <div className="App">
-      <h1>
-        {`Hello, ${user.name}, hello ${user.lastname}!`}
-      </h1>
-      <Card />
-    </div>
-  );
+    return (
+        <div className="App">
+            <h1>
+                {`Hello, ${user.name}, hello ${user.lastname}!`}
+            </h1>
+            <Card/>
+        </div>
+    );
 }
 
-export default Elem;
+export default Apps;

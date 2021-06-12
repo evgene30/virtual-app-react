@@ -1,6 +1,6 @@
-import "../css/App.css";
+import "./App.css";
 import React from 'react';
-import Card from './Card';
+import Card from '../Card/Card';
 
 const user = {
     name: "Vladilen",

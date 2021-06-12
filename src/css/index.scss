@@ -1,0 +1,16 @@
+/* CSS Reset */
+@import "base/reset";
+
+/* Core variables */
+@import "base/vars";
+
+/* Fonts */
+@import "base/fonts";
+
+body {
+  font-family: "Roboto", -apple-system, 'Segoe UI', 'Oxygen',
+  'Ubuntu';
+  background-color: $body;
+  color: black;
+}
+

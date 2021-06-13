@@ -1,0 +1,40 @@
+.header-sections__search {
+  margin-left: 20px;
+  width: 100%;
+  margin-right: 98px;
+}
+
+.header__input {
+  width: 100%;
+  max-width: 505px;
+  height: 36px;
+  background: linear-gradient(0deg, #f6f6f6, #f6f6f6), #fefefe;
+  border: 1px solid #e2e2e2;
+  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  padding-left: 37px;
+  padding-right: 37px;
+  margin-right: -70px;
+}
+
+.header__input::placeholder {
+  color: #adadad;
+}
+
+.header__input:hover,
+.header__input:focus {
+  color: #53565a;
+  border: 1px solid #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.icon__search {
+  position: absolute;
+  z-index: 1;
+  color: #4d4d4d;
+  top: 33px;
+  margin-left: 13px;
+}

@@ -9,8 +9,30 @@
 
 body {
   font-family: "Roboto", -apple-system, 'Segoe UI', 'Oxygen',
-  'Ubuntu';
-  background-color: $body;
-  color: black;
+  'Ubuntu', sans-serif;
+  background-color: white;
 }
 
+.container-page {
+  display: block;
+  max-width: 1440px;
+  background-color: white;
+  height: 1024px;
+  background-image: url(../images/content/senla_man.svg);
+  background-repeat: no-repeat;
+  background-position: right 5px bottom 71px;
+  padding-top: 22px;
+  padding-left: 23px;
+  margin: 0 auto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: $not-active;
+}
+
+@media screen and (max-width: 910px) {
+  .container-page {
+    background-size: 100%;
+  }
+
+}

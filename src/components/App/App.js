@@ -1,21 +1,13 @@
 import "./App.scss";
 import React from 'react';
-import Card from '../Card/Card';
+import Header from '../Header/Header';
 
-const user = {
-    name: "Vladilen",
-    lastname: "Minin",
-};
+const Apps = App();
 
-const Apps = App(user);
-
-function App(user) {
+function App() {
     return (
         <div className="App">
-            <h1>
-                {`Hello, ${user.name}, hello ${user.lastname}!`}
-            </h1>
-            <Card/>
+            <Header/>
         </div>
     );
 }

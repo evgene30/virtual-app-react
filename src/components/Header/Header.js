@@ -7,6 +7,7 @@ import Menu from "./Menu/Menu";
 
 class Header extends Component {
     render() {
+        let menu = this.props.menu;
         return (
             <div className="header-section">
                 <section className="header-sections__items" id="header__items">
@@ -14,7 +15,7 @@ class Header extends Component {
                     <Search/>
                 </section>
                 <section className="header__nav nav__menu" id="header__nav">
-                    <Menu/>
+                    <Menu menu={menu}/>
                 </section>
             </div>
         );

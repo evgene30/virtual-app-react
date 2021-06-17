@@ -2,10 +2,10 @@ import './Menu.scss';
 import React from 'react';
 import {Component} from 'react';
 
-const nameMenu = ['All', 'Active', 'Done'];
 
 class Menu extends Component {
     render() {
+        let nameMenu = this.props.menu; // передаем пропс меню из App
         return (
             <nav className="header-nav__menu">
                 <ul className="header-nav-menu__link" id="list">

@@ -1,10 +1,17 @@
+import { random } from "nanoid";
 import React from "react";
 import { Component } from "react";
 
-let nexId = 0;
+
+if (!localStorage.getItem("todoList")) {
+    localStorage.setItem("todoList", JSON.stringify(TodoList))
+}
+
+
+
 class Input extends Component {
     state = {
-        id: nexId++,
+        id: 0,
         text: "",
         checked: false,
         mark: false,
@@ -15,13 +22,21 @@ class Input extends Component {
             // проверка на ввод пробелов
             return (event.target.value = "");
         }
-        this.setState({ text: event.target.value });
+        this.setState({ text: event.target.value.trim() });
     };
-    formSubmit = (event) => {
+    handleFormSubmit = (event) => {
         event.preventDefault(); // отключение поведения формы по умолчанию
+        this.setState(this.massiveSave); // добавляем в массив
         event.target.reset(); // очистка формы
+    };
 
-        console.log(this.state);
+    massiveSave = () => {
+        TodoList.unshift(this.state); // добавляем в массив
+        this.saveLocal(); // добавляем массив в локал
+    };
+
+    saveLocal = () => {
+        localStorage.setItem("todoList", JSON.stringify(TodoList));
     };
 
     render() {
@@ -30,7 +45,7 @@ class Input extends Component {
                 <form
                     id="taskform"
                     className="main__form"
-                    onSubmit={this.formSubmit}
+                    onSubmit={this.handleFormSubmit}
                 >
                     <p className="form__text">New Task</p>
                     <textarea

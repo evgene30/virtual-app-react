@@ -1,7 +1,7 @@
-import './Menu.scss';
-import React from 'react';
-import {Component} from 'react';
-
+import "./Menu.scss";
+import React from "react";
+import { Component } from "react";
+import PropTypes from "prop-types";
 
 class Menu extends Component {
     render() {
@@ -10,15 +10,25 @@ class Menu extends Component {
             <nav className="header-nav__menu">
                 <ul className="header-nav-menu__link" id="list">
                     {nameMenu.map((item) => {
-                            return (
-                                <li id={item.toLocaleLowerCase()} tabIndex="0" key={item.toLocaleLowerCase()}>
-                                    <a className={item === 'All' ? 'nonclick active' : 'nonclick'} href="#">
-                                        {item}
-                                    </a>
-                                </li>
-                            )
-                        }
-                    )}
+                        return (
+                            <li
+                                id={item.toLocaleLowerCase()}
+                                tabIndex="0"
+                                key={item.toLocaleLowerCase()}
+                            >
+                                <a
+                                    className={
+                                        item === "All"
+                                            ? "nonclick active"
+                                            : "nonclick"
+                                    }
+                                    href="#"
+                                >
+                                    {item}
+                                </a>
+                            </li>
+                        );
+                    })}
                 </ul>
             </nav>
         );
@@ -26,3 +36,7 @@ class Menu extends Component {
 }
 
 export default Menu;
+
+Menu.propTypes = {
+    nameMenu: PropTypes.arrayOf(PropTypes.string)
+};

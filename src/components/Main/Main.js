@@ -1,7 +1,7 @@
 import './Main.scss';
 import React from 'react';
 import {Component} from 'react';
-import InputTask from './InputTask/InputTask';
+import Input from './Input/InputTask';
 import Todolist from './Todolist/Todolist';
 
 
@@ -10,7 +10,7 @@ class Main extends Component {
         return (
             <main className="main" id="main">
                 <section className="main__newtask" id="main__form">
-                    <InputTask/>
+                    <Input/>
                 </section>
                 <section className="main__task" id="main__list">
                     <Todolist/>

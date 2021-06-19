@@ -2,12 +2,11 @@ import { random } from "nanoid";
 import React from "react";
 import { Component } from "react";
 
-
-if (!localStorage.getItem("todoList")) {
-    localStorage.setItem("todoList", JSON.stringify(TodoList))
+const TodoList = [];
+let getElem = localStorage.getItem("todoList");
+if (!getElem) {
+    localStorage.setItem("todoList", JSON.stringify(TodoList));
 }
-
-
 
 class Input extends Component {
     state = {
@@ -22,7 +21,9 @@ class Input extends Component {
             // проверка на ввод пробелов
             return (event.target.value = "");
         }
-        this.setState({ text: event.target.value.trim() });
+        this.setState({
+            text: event.target.value.trim().replace(/\s+|\n/g, " "), // убираем лишние пробелы и переносы строк
+        });
     };
     handleFormSubmit = (event) => {
         event.preventDefault(); // отключение поведения формы по умолчанию

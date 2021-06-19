@@ -37,6 +37,7 @@ class Input extends Component {
             TodoList.unshift(this.state); // добавляем в массив
             localStorage.setItem("todoList", JSON.stringify(TodoList)); // сохраняем в локал
             this.commentInput.value = "";
+            
         }
     };
 

@@ -1,4 +1,4 @@
-// import { random } from "nanoid";
+import { nanoid } from "nanoid";
 import React from "react";
 import { Component } from "react";
 
@@ -6,7 +6,7 @@ class Input extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: 0,
+            id: nanoid(),
             text: "",
             checked: false,
             mark: false,
@@ -23,15 +23,13 @@ class Input extends Component {
         });
     };
     handleFormSubmit = (event) => {
+        // поведение формы
         event.preventDefault(); // отключение поведения формы по умолчанию
-        this.setState(this.massiveSave); // добавляем в массив
-        event.target.reset(); // очистка формы
-    };
-
-    massiveSave = () => {
         const TodoList = JSON.parse(localStorage.getItem("todoList")) || []; // инициализируем переменную, запрашиваем данные из хранилища
+        this.setState({ id: nanoid() }); // генерируем динамический id
         TodoList.unshift(this.state); // добавляем в массив
         localStorage.setItem("todoList", JSON.stringify(TodoList)); // сохраняем в локал
+        event.target.reset(); // очистка формы
     };
 
     render() {

@@ -3,7 +3,7 @@ import { Component } from "react";
 import delPick from "./images/del.svg";
 
 const List = [];
-console.log(List)
+
 
 class Todolist extends Component {
 

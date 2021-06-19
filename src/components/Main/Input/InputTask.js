@@ -2,19 +2,16 @@
 import React from "react";
 import { Component } from "react";
 
-const TodoList = [];
-let getElem = localStorage.getItem("todoList");
-if (!getElem) {
-    localStorage.setItem("todoList", JSON.stringify(TodoList));
-}
-
 class Input extends Component {
-    state = {
-        id: 0,
-        text: "",
-        checked: false,
-        mark: false,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: 0,
+            text: "",
+            checked: false,
+            mark: false,
+        };
+    }
 
     inputString = (event) => {
         if (event.target.value === " ") {
@@ -32,12 +29,9 @@ class Input extends Component {
     };
 
     massiveSave = () => {
+        const TodoList = JSON.parse(localStorage.getItem("todoList")) || []; // инициализируем переменную, запрашиваем данные из хранилища
         TodoList.unshift(this.state); // добавляем в массив
-        this.saveLocal(); // добавляем массив в локал
-    };
-
-    saveLocal = () => {
-        localStorage.setItem("todoList", JSON.stringify(TodoList));
+        localStorage.setItem("todoList", JSON.stringify(TodoList)); // сохраняем в локал
     };
 
     render() {

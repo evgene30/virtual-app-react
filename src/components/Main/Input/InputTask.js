@@ -3,15 +3,12 @@ import React from "react";
 import { Component } from "react";
 
 class Input extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: nanoid(),
-            text: "",
-            checked: false,
-            mark: false,
-        };
-    }
+    state = {
+        id: nanoid(),
+        text: "",
+        checked: false,
+        mark: false,
+    };
 
     inputString = (event) => {
         if (event.target.value === " ") {
@@ -32,6 +29,17 @@ class Input extends Component {
         event.target.reset(); // очистка формы
     };
 
+    keyPress = (event) => {
+        const code = event.keyCode || event.which;
+        if (code === 13) {
+            const TodoList = JSON.parse(localStorage.getItem("todoList")) || []; // инициализируем переменную, запрашиваем данные из хранилища
+            this.setState({ id: nanoid() }); // генерируем динамический id
+            TodoList.unshift(this.state); // добавляем в массив
+            localStorage.setItem("todoList", JSON.stringify(TodoList)); // сохраняем в локал
+            this.commentInput.value = "";
+        }
+    };
+
     render() {
         return (
             <div>
@@ -46,6 +54,8 @@ class Input extends Component {
                         className="area"
                         id="input"
                         onChange={this.inputString}
+                        onKeyPress={this.keyPress}
+                        ref={(input) => (this.commentInput = input)}
                         tabIndex="0"
                         required
                     />

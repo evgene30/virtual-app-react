@@ -3,21 +3,61 @@ import { Component } from "react";
 import delPick from "./images/del.svg";
 
 class Card extends Component {
+    state = {
+        isChecked: false,
+        isMark: false,
+    };
+
     delCard = (id) => {
         // удаление карточки
         this.props.handleDeleteCard(id);
     };
+    handleMark = (mark) => {
+        // метод проверки состояния и изменения его в объекте
+        // const stateMark = !this.state.isMark
+        console.log(mark)
+        
+       
+
+    };
+
+    newOperand = (checked, mark) => {
+        //метод сравнения данных при нажатии кнопок внутри
+        let mass = ["text"]; // css селекторы
+        if (checked) {
+            mass.push("unmarktext");
+        }
+        if (mark) {
+            mass.push("text-list__item--active");
+        }
+        return mass.join().replace(/,/g, " ");
+    };
 
     render() {
-        const { id, text } = this.props.info; // убираем синтаксис входящих props
+        const { id, text, checked, mark } = this.props.info; // убираем синтаксис входящих props
         return (
             <li tabIndex="0" className="main-list__item" id={id}>
-                <div className="text">
+                <div
+                    className={this.newOperand(checked, mark)}
+                    defaultChecked={this.state.isChecked}
+                    onClick={() => this.handleClick(checked)}
+                >
                     <p>{text}</p>
                 </div>
-                <div tabIndex="0" className="mark-list__item">
-                    IMPORTANT
+
+                <div
+                    tabIndex="0"
+                    defaultChecked={this.state.isMark}
+                    onClick={() => this.handleMark(mark)}
+                    className={
+                        mark
+                            ? "mark-list__item mark-list__item--active"
+                            : "mark-list__item"
+                    }
+                >
+                    {mark ? "NOT IMPORTANT" : "IMPORTANT"}
                 </div>
+
                 <div
                     tabIndex="0"
                     className="del_button"

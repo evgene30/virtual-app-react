@@ -1,27 +1,33 @@
 import React from "react";
 import { Component } from "react";
-import delPick from "./images/del.svg";
-
-const List = [];
-
+import Card from "./Card";
 
 class Todolist extends Component {
+    state = {
+        todoList: JSON.parse(localStorage.getItem("todoList")) || [],
+    };
+
+    handleDeleteCard = (id) => {
+        this.setState((state) => {
+            localStorage.setItem(
+                "todoList",
+                JSON.stringify(
+                    state.todoList.filter((element) => element.id !== id)
+                )
+            );
+        });
+    };
 
     render() {
-        
         return (
             <ul className="main-list__items" id="todoList" tabIndex="0">
-                {List.map(item =>
-                <li key={item.id} tabIndex="0" className="main-list__item" id={item.id}>
-                    <div className="text">
-                        <p>{item.text}</p>
-                    </div>
-                    <div tabIndex="0" className="mark-list__item">IMPORTANT</div>
-                    <div tabIndex="-1" className="del_button" tabIndex="0">
-                        <img src={delPick} title="Delete" alt="delete" />
-                    </div>
-                </li>
-                )}
+                {this.state.todoList.map((item) => (
+                    <Card
+                        handleDeleteCard={this.handleDeleteCard}
+                        key={item.id}
+                        info={item}
+                    />
+                ))}
             </ul>
         );
     }

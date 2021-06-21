@@ -15,10 +15,8 @@ class Todolist extends Component {
                 ...state.todoList.slice(0, index),
                 ...state.todoList.slice(index + 1),
             ];
-            ;
-            return state.todoList = newArray;
+            return (state.todoList = newArray);
         });
-        // localStorage.setItem("todoList", JSON.stringify(this.state.todoList));
     };
 
     stateMark = (id) => {
@@ -28,7 +26,7 @@ class Todolist extends Component {
                     ? (element.mark = !element.mark)
                     : element.mark
             );
-            localStorage.setItem("todoList", JSON.stringify(state.todoList));
+            return state.todoList;
         });
     };
     stateChecked = (id) => {
@@ -38,11 +36,12 @@ class Todolist extends Component {
                     ? (element.checked = !element.checked)
                     : element.checked
             );
-            localStorage.setItem("todoList", JSON.stringify(state.todoList));
+            return state.todoList;
         });
     };
 
     render() {
+        localStorage.setItem("todoList", JSON.stringify(this.state.todoList));
         return (
             <ul className="main-list__items" id="todoList" tabIndex="0">
                 {this.state.todoList.map((item) => (

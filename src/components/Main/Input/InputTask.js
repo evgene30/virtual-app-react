@@ -23,6 +23,7 @@ class Input extends Component {
         // поведение формы
         event.preventDefault(); // отключение поведения формы по умолчанию
         const TodoList = JSON.parse(localStorage.getItem("todoList")) || []; // инициализируем переменную, запрашиваем данные из хранилища
+        
         this.setState({ id: nanoid() }); // генерируем динамический id
         TodoList.unshift(this.state); // добавляем в массив
         localStorage.setItem("todoList", JSON.stringify(TodoList)); // сохраняем в локал

@@ -16,6 +16,10 @@ class Card extends Component {
         // метод проверки состояния и изменения его в объекте Mark
         this.props.stateMark(id);
     };
+    handleChecked = (id) => {
+        // метод проверки состояния и изменения его в объекте Checked
+        this.props.stateChecked(id);
+    };
 
     newOperand = (checked, mark) => {
         //метод сравнения данных при нажатии кнопок внутри
@@ -35,15 +39,13 @@ class Card extends Component {
             <li tabIndex="0" className="main-list__item" id={id}>
                 <div
                     className={this.newOperand(checked, mark)}
-                    // defaultChecked={this.state.isChecked}
-                    onClick={() => this.handleClick(checked)}
+                    onClick={() => this.handleChecked(id)}
                 >
                     <p>{text}</p>
                 </div>
 
                 <div
                     tabIndex="0"
-                    // defaultChecked={this.state.isMark}
                     onClick={() => this.handleMark(id)}
                     className={
                         mark

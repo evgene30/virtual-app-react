@@ -28,6 +28,16 @@ class Todolist extends Component {
             localStorage.setItem("todoList", JSON.stringify(state.todoList));
         });
     };
+    stateChecked = (id) => {
+        this.setState((state) => {
+            state.todoList.forEach((element) =>
+                element.id === id
+                    ? (element.checked = !element.checked)
+                    : element.checked
+            );
+            localStorage.setItem("todoList", JSON.stringify(state.todoList));
+        });
+    };
 
     render() {
         return (
@@ -35,6 +45,7 @@ class Todolist extends Component {
                 {this.state.todoList.map((item) => (
                     <Card
                         stateMark={this.stateMark}
+                        stateChecked={this.stateChecked}
                         handleDeleteCard={this.handleDeleteCard}
                         key={item.id}
                         info={item}

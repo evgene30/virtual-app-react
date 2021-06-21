@@ -59,9 +59,21 @@ class Input extends Component {
                         tabIndex="0"
                         required
                     />
-                    <button className="area__button" id="btn" type="submit">
-                        ADD
-                    </button>
+                    {!this.commentInput && (
+                        <button
+                            className="area__button button_disabled"
+                            id="btn"
+                            type="submit"
+                            disabled
+                        >
+                            ADD
+                        </button>
+                    )}
+                    {this.commentInput && (
+                        <button className="area__button" id="btn" type="submit">
+                            ADD
+                        </button>
+                    )}
                 </form>
             </div>
         );

@@ -3,11 +3,6 @@ import { Component } from "react";
 import delPick from "./images/del.svg";
 
 class Card extends Component {
-    // state = {
-    //     isChecked: false,
-    //     isMark: false,
-    // };
-
     delCard = (id) => {
         // удаление карточки
         this.props.handleDeleteCard(id);

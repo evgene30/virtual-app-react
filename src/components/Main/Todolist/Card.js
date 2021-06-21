@@ -3,22 +3,18 @@ import { Component } from "react";
 import delPick from "./images/del.svg";
 
 class Card extends Component {
-    state = {
-        isChecked: false,
-        isMark: false,
-    };
+    // state = {
+    //     isChecked: false,
+    //     isMark: false,
+    // };
 
     delCard = (id) => {
         // удаление карточки
         this.props.handleDeleteCard(id);
     };
-    handleMark = (mark) => {
-        // метод проверки состояния и изменения его в объекте
-        // const stateMark = !this.state.isMark
-        console.log(mark)
-        
-       
-
+    handleMark = (id) => {
+        // метод проверки состояния и изменения его в объекте Mark
+        this.props.stateMark(id);
     };
 
     newOperand = (checked, mark) => {
@@ -39,7 +35,7 @@ class Card extends Component {
             <li tabIndex="0" className="main-list__item" id={id}>
                 <div
                     className={this.newOperand(checked, mark)}
-                    defaultChecked={this.state.isChecked}
+                    // defaultChecked={this.state.isChecked}
                     onClick={() => this.handleClick(checked)}
                 >
                     <p>{text}</p>
@@ -47,8 +43,8 @@ class Card extends Component {
 
                 <div
                     tabIndex="0"
-                    defaultChecked={this.state.isMark}
-                    onClick={() => this.handleMark(mark)}
+                    // defaultChecked={this.state.isMark}
+                    onClick={() => this.handleMark(id)}
                     className={
                         mark
                             ? "mark-list__item mark-list__item--active"

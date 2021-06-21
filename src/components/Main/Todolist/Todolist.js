@@ -9,16 +9,16 @@ class Todolist extends Component {
 
     handleDeleteCard = (id) => {
         this.setState((state) => {
-            state.todoList.forEach((element) => {
-                if (element.id === id) {
-                    const index = state.todoList.indexOf(element);
-                    state.todoList.splice(index, 1);
-                    console.log(state.todoList);
-                }
-            });
+            const index = state.todoList.findIndex((el) => el.id === id);
 
-            localStorage.setItem("todoList", JSON.stringify(state.todoList));
+            const newArray = [
+                ...state.todoList.slice(0, index),
+                ...state.todoList.slice(index + 1),
+            ];
+            ;
+            return state.todoList = newArray;
         });
+        // localStorage.setItem("todoList", JSON.stringify(this.state.todoList));
     };
 
     stateMark = (id) => {

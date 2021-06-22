@@ -2,17 +2,19 @@ import "./App.scss";
 import React from "react";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
+import { Component } from "react";
 
-let nameMenu = ["All", "Active", "Done"]; // вкладки меню
-const Apps = App(); // запуск основной функции с элементами
+const nameMenu = ["All", "Active", "Done"]; // вкладки меню
 
-function App() {
-    return (
-        <div className="App">
-            <Header menu={nameMenu} />
-            <Main />
-        </div>
-    );
+class App extends Component {
+    render() {
+        return (
+            <div className="App">
+                <Header menu={nameMenu} />
+                <Main />
+            </div>
+        );
+    }
 }
 
-export default Apps;
+export default App;

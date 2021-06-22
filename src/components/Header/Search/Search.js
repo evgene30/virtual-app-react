@@ -10,9 +10,11 @@ class Search extends Component {
 
     headerSearch = (event) => {
         this.setState((state) => {
-            return state.value = event.targrt.value;
+           return state.value = event.target.value.trim()
         });
-        console.log(this.state.value)
+        
+        
+        console.log(event.target.value)
     }
 
 

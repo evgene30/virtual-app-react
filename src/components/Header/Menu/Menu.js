@@ -4,10 +4,7 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 
 class Menu extends Component {
-    state = {
-        TodoList: JSON.parse(localStorage.getItem("todoList")) || [],
-    };
-
+    
     clickChange = (event) => {
         let listITems = document.querySelectorAll("#list a"); // находим ссылки по классу
 
@@ -18,23 +15,11 @@ class Menu extends Component {
         });
         event.target.className = "nonclick active"; // класс элемента на который мы нажимаем
 
-        // this.setState((state) => {
-        //     if (event.target.parentElement.id === 'all') {
-        //         state.TodoList.filter(item => item);
-        //         return state.TodoList
-
-        //     }
-        //     if (event.target.parentElement.id === 'active') {
-        //         state.TodoList.filter(item => console.log(item.checked === true));
-        //         return state.TodoList
-        //     }
-        // })
-
         const delForm = document.querySelector("#taskform"); //находим форму
         let listItems = document.querySelectorAll(".main-list__items li"); // находим все элементы списка
         let impButtom = document.querySelectorAll(".mark-list__item"); // находим кнопки
 
-        document.getElementById("all").addEventListener("click", () => {
+        if (event.target.parentElement.id === "all") {
             delForm.style.display = "block"; // не скрываем блок ввода
             impButtom.forEach((elem) => {
                 elem.style.visibility = "visible"; // не скрываем кнопку важности
@@ -42,9 +27,9 @@ class Menu extends Component {
             listItems.forEach((element) => {
                 element.style.display = "flex"; // отображаем все элементы списка
             });
-        });
+        }
 
-        document.getElementById("active").addEventListener("click", () => {
+        if (event.target.parentElement.id === "active") {
             delForm.style.display = "block";
             impButtom.forEach((elem) => {
                 elem.style.visibility = "visible";
@@ -57,9 +42,9 @@ class Menu extends Component {
                     element.style.display = "flex"; // отображаем элемент
                 }
             });
-        });
+        }
 
-        document.getElementById("done").addEventListener("click", () => {
+        if (event.target.parentElement.id === "done") {
             // delForm.style.display = "none"; // скрываем поле ввода
             impButtom.forEach((elem) => {
                 elem.style.visibility = "hidden"; // скрываем кнопку важности
@@ -71,7 +56,7 @@ class Menu extends Component {
                     element.style.display = "none";
                 }
             });
-        });
+        }
     };
 
     render() {

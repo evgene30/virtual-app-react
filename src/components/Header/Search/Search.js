@@ -9,15 +9,22 @@ class Search extends Component {
     };
 
     headerSearch = (event) => {
-        this.setState((state) => {
-           return state.value = event.target.value.trim()
-        });
-        
-        
-        console.log(event.target.value)
-    }
-
-
+        const value = event.target.value.trim(); // значение ввода
+        const itemsSerch = document.querySelectorAll("#todoList li");
+        if (value !== "") {
+            itemsSerch.forEach((element) => {
+                if (element.innerText.search(value) === -1) {
+                    element.style.display = "none"; // убираем не подходящие блоки
+                } else {
+                    element.style.display = "flex";
+                }
+            });
+        } else {
+            itemsSerch.forEach((element) => {
+                element.style.display = "flex"; // возвращаем обратное значение
+            });
+        }
+    };
 
     render() {
         return (

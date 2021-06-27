@@ -1,6 +1,5 @@
-import React from "react";
-import { Component } from "react";
-import delPick from "./images/del.svg";
+import React, {Component} from 'react';
+import delPick from "../../../assets/svg/del.svg";
 
 class Card extends Component {
     delCard = (id) => {
@@ -29,7 +28,7 @@ class Card extends Component {
     };
 
     render() {
-        const { id, text, checked, mark } = this.props.info; // убираем синтаксис входящих props
+        const {id, text, checked, mark} = this.props.info; // убираем синтаксис входящих props
         return (
             <li tabIndex="0" className="main-list__item" id={id}>
                 <div
@@ -54,10 +53,9 @@ class Card extends Component {
                 <div
                     tabIndex="0"
                     className="del_button"
-                    tabIndex="0"
                     onClick={() => this.delCard(id)} // синтаксис отложенного вызова по нажатию кнопки
                 >
-                    <img src={delPick} title="Delete" alt="delete" />
+                    <img src={delPick} title="Delete" alt="delete"/>
                 </div>
             </li>
         );

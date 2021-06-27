@@ -1,10 +1,9 @@
 import "./Menu.scss";
-import React from "react";
-import { Component } from "react";
+import React, {Component} from 'react';
 import PropTypes from "prop-types";
 
 class Menu extends Component {
-    
+
     clickChange = (event) => {
         let listITems = document.querySelectorAll("#list a"); // находим ссылки по классу
 

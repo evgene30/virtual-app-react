@@ -1,7 +1,6 @@
 import './Logo.scss';
-import React from 'react';
-import { Component } from 'react';
-import logo from "./images/senla_logo.svg";
+import React, {Component} from 'react';
+import logo from "../../../assets/svg/senla_logo.svg";
 
 const imageLogo = <img className="image__logo" src={logo} alt="logo SENLA" />;
 

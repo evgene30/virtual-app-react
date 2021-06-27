@@ -147,6 +147,7 @@
         }
       }
 
+
       .text-list__item--active {
         font-weight: 700;
         color: #53565a;
@@ -157,7 +158,7 @@
 
         &::after {
           display: inline-block;
-          content: url("./images/star_border.svg");
+          content: url("../../assets/svg/star_border.svg");
           position: relative;
           bottom: 17px;
           left: -1px;
@@ -191,4 +192,8 @@
       }
     }
   }
+}
+
+.main-list__item-dis {
+  display: none;
 }

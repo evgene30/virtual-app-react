@@ -1,82 +1,80 @@
 import "./Main.scss";
-import React from "react";
-import { Component } from "react";
-import { nanoid } from "nanoid";
-import Card from "./Todolist/Card";
+import React, {Component} from 'react';
+import {nanoid} from "nanoid";
+import Card from "./Cards/Card";
 
 class Main extends Component {
-    state = {
-        text: "",
-        TodoList: JSON.parse(localStorage.getItem("todoList")) || [],
-    };
 
-    inputString = (event) => {
+// работа с компонентом Input (формой) ввода
+
+    inputString = (event) => { // поле ввода
         if (event.target.value === " ") {
             // проверка на ввод пробелов
             return (event.target.value = "");
         }
-        return this.setState({
-            text: event.target.value.trim().replace(/\s+|\n/g, " "), // убираем лишние пробелы и переносы строк
-        });
+        this.props.updateText(event.target.value.trim().replace(/\s+|\n/g, " ")) // убираем лишние пробелы и
+        // переносы строк, передаем в App
     };
 
     handleFormSubmit = (event) => {
         // поведение формы
-        event.preventDefault(); // отключение поведения формы по умолчанию
-        this.setState((state) => {
-            state.TodoList.unshift({
-                id: nanoid(),
-                text: state.text,
-                checked: false,
-                mark: false,
-            });
-            this.clearInput.value = "";
-            return this.setState;
+        // отключение поведения формы по умолчанию
+        event.preventDefault();
+        const newTodoList = [...this.props.TodoList];
+        // формирование объекта данных
+        newTodoList.unshift({
+            id: nanoid(),
+            text: this.props.text, // применяем состояние из App
+            checked: false,
+            mark: false,
+            visibility: true,
         });
+        this.props.updateState(newTodoList);
+        this.clearInput.value = "";
     };
 
-    keyPress = (event) => {
+    keyPress = (event) => { // ввод кнопкой текста
         const code = event.keyCode || event.which;
         if (code === 13) {
             this.handleFormSubmit(event);
         }
     };
 
-    handleDeleteCard = (id) => {
-        this.setState((state) => {
-            const index = state.TodoList.findIndex((el) => el.id === id);
+// работа с компонентом карточки
 
-            const newArray = [
-                ...state.TodoList.slice(0, index),
-                ...state.TodoList.slice(index + 1),
-            ];
-            return (state.TodoList = newArray);
-        });
+    handleDeleteCard = (id) => {
+        // удаление записи (карточки) в листе
+        const index = this.props.TodoList.findIndex((el) => el.id === id);
+
+        const newArray = [
+            ...this.props.TodoList.slice(0, index),
+            ...this.props.TodoList.slice(index + 1),
+        ];
+        this.props.updateState(newArray);
     };
 
     stateMark = (id) => {
-        this.setState((state) => {
-            state.TodoList.forEach((element) =>
-                element.id === id
-                    ? (element.mark = !element.mark)
-                    : element.mark
-            );
-            return state.TodoList;
-        });
+        // передаем выделение текста по кнопке (Mark)
+        const newTodoList = [...this.props.TodoList];
+        newTodoList.forEach((element) =>
+            element.id === id
+                ? (element.mark = !element.mark)
+                : element.mark
+        );
+        this.props.updateState(newTodoList);
     };
     stateChecked = (id) => {
-        this.setState((state) => {
-            state.TodoList.forEach((element) =>
-                element.id === id
-                    ? (element.checked = !element.checked)
-                    : element.checked
-            );
-            return state.TodoList;
-        });
+        // передаем перечеркивание текста по кнопке (Checked)
+        const newTodoList = [...this.props.TodoList];
+        newTodoList.forEach((element) =>
+            element.id === id
+                ? (element.checked = !element.checked)
+                : element.checked
+        );
+        this.props.updateState(newTodoList);
     };
 
     render() {
-        localStorage.setItem("todoList", JSON.stringify(this.state.TodoList));
         return (
             <main className="main" id="main">
                 <section className="main__newtask" id="main__form">
@@ -97,39 +95,33 @@ class Main extends Component {
                                 tabIndex="0"
                                 required
                             />
-                            {!this.clearInput && (
-                                <button
-                                    className="area__button button_disabled"
-                                    id="btn"
-                                    type="submit"
-                                    disabled
-                                >
-                                    ADD
-                                </button>
-                            )}
-                            {this.clearInput && (
-                                <button
-                                    className="area__button"
-                                    id="btn"
-                                    type="submit"
-                                >
-                                    ADD
-                                </button>
-                            )}
+                            <button
+                                className={!this.clearInput ? "area__button button_disabled" : "area__button"}
+                                id="btn"
+                                type="submit"
+                                disabled={!this.clearInput}
+                            >
+                                ADD
+                            </button>
                         </form>
                     </div>
                 </section>
                 <section className="main__task" id="main__list">
                     <ul className="main-list__items" id="todoList" tabIndex="0">
-                        {this.state.TodoList.map((item) => (
-                            <Card
-                                stateMark={this.stateMark}
-                                stateChecked={this.stateChecked}
-                                handleDeleteCard={this.handleDeleteCard}
-                                key={item.id}
-                                info={item}
-                            />
-                        ))}
+                        {this.props.TodoList.map((item) => {
+                                if (item.visibility) {
+                                    return (
+                                        <Card
+                                            stateMark={this.stateMark}
+                                            stateChecked={this.stateChecked}
+                                            handleDeleteCard={this.handleDeleteCard}
+                                            key={item.id}
+                                            info={item}
+                                        />
+                                    )
+                                }
+                            }
+                        )}
                     </ul>
                 </section>
             </main>

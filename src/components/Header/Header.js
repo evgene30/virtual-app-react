@@ -6,10 +6,12 @@ import Menu from "./Menu/Menu";
 
 class Header extends Component {
     render() {
-        let menu = this.props.menu;
-        let search = this.props.search;
-        let TodoList = this.props.TodoList;
-        let updateSearch = this.props.updateSearch;
+        const menu = this.props.menu;
+        const search = this.props.search;
+        const TodoList = this.props.TodoList;
+        const updateSearch = this.props.updateSearch;
+        const clickBut = this.props.clickBut;
+        const updateButtom = this.props.updateButtom;
         return (
             <div className="header-section">
                 <section className="header-sections__items" id="header__items">
@@ -21,7 +23,12 @@ class Header extends Component {
                     />
                 </section>
                 <section className="header__nav nav__menu" id="header__nav">
-                    <Menu menu={menu}/>
+                    <Menu
+                        menu={menu}
+                        TodoList={TodoList}
+                        clickBut={clickBut}
+                        updateButtom={updateButtom}
+                    />
                 </section>
             </div>
         );

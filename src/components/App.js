@@ -9,6 +9,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            clickBut: {All: true, Active: false, Done: false},
             text: "",
             search: "",
             TodoList: JSON.parse(localStorage.getItem("todoList")) || [],
@@ -43,6 +44,11 @@ class App extends Component {
         this.setState({search: valueNewObjSearch})
     }
 
+    updateButtom = (valueNewObjButtom) => {
+        this.setState({clickBut: valueNewObjButtom})
+    }
+
+
     render() {
         return (
             <div className="App">
@@ -51,6 +57,8 @@ class App extends Component {
                     updateSearch={this.updateSearch} забираем состояние поиска
                     search={this.state.search} // передаем состояние поля ввода поиска
                     TodoList={this.state.TodoList} // передаем состояние TodoList
+                    clickBut={this.state.clickBut} // передаем состояние отображения кнопок меню
+                    updateButtom={this.updateButtom} // забираем состояние кнопок меню
                 />
                 <Main updateText={this.updateText} // забираем состояние поля ввода Input
                       updateState={this.updateState} // забираем состояние TodoList

@@ -5,58 +5,31 @@ import PropTypes from "prop-types";
 class Menu extends Component {
 
     clickChange = (event) => {
-        let listITems = document.querySelectorAll("#list a"); // находим ссылки по классу
+        const newTodoList = [...this.props.TodoList]; // лист элементов TodoList
+        const buttonState = [this.props.clickBut];// состояние кнопок (false)
 
-        listITems.forEach((item) => {
-            if (item.className) {
-                item.className = "nonclick";
-            }
-        });
-        event.target.className = "nonclick active"; // класс элемента на который мы нажимаем
 
-        const delForm = document.querySelector("#taskform"); //находим форму
-        let listItems = document.querySelectorAll(".main-list__items li"); // находим все элементы списка
-        let impButtom = document.querySelectorAll(".mark-list__item"); // находим кнопки
+        if (event.target.text === 'All') {
 
-        if (event.target.parentElement.id === "all") {
-            delForm.style.display = "block"; // не скрываем блок ввода
-            impButtom.forEach((elem) => {
-                elem.style.visibility = "visible"; // не скрываем кнопку важности
-            });
-            listItems.forEach((element) => {
-                element.style.display = "flex"; // отображаем все элементы списка
-            });
+
+            // return this.props.updateButtom(buttonState);
+
         }
 
-        if (event.target.parentElement.id === "active") {
-            delForm.style.display = "block";
-            impButtom.forEach((elem) => {
-                elem.style.visibility = "visible";
-            });
-            listItems.forEach((element) => {
-                if (element.children[0].classList.contains("unmarktext")) {
-                    // проверяем элемент на наличие стиля перечеркивания
-                    element.style.display = "none";
-                } else {
-                    element.style.display = "flex"; // отображаем элемент
-                }
-            });
-        }
 
-        if (event.target.parentElement.id === "done") {
-            // delForm.style.display = "none"; // скрываем поле ввода
-            impButtom.forEach((elem) => {
-                elem.style.visibility = "hidden"; // скрываем кнопку важности
-            });
-            listItems.forEach((element) => {
-                if (element.children[0].classList.contains("unmarktext")) {
-                    element.style.display = "flex"; // отображаем выполненные задания
-                } else {
-                    element.style.display = "none";
-                }
-            });
-        }
+        console.log(this.props.clickBut)
+
+
     };
+
+    valueState = (props) => {
+        if (props[0] === true) {
+            return 'nonclick active'
+
+        } else {
+            return 'nonclick active'
+        }
+    }
 
     render() {
         let nameMenu = this.props.menu; // передаем пропс меню из App
@@ -71,11 +44,7 @@ class Menu extends Component {
                                 key={item.toLocaleLowerCase()}
                             >
                                 <a
-                                    className={
-                                        item === "All"
-                                            ? "nonclick active"
-                                            : "nonclick"
-                                    }
+                                    className={this.valueState(this.props.clickBut)}
                                     href="#"
                                     onClick={this.clickChange}
                                 >

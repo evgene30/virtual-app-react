@@ -18,7 +18,15 @@ class App extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         // обновление данных в хранилище
         localStorage.setItem("todoList", JSON.stringify(this.state.TodoList));
+    }
 
+    componentDidMount() {
+        // обновляем состояние видимости элементов
+        const newTodoList = [...this.state.TodoList];
+        newTodoList.map((element) =>
+            element.visibility = true
+        );
+        this.setState({TodoList: newTodoList})
     }
 
     updateState = (valueNewObjState) => {
@@ -34,7 +42,6 @@ class App extends Component {
     updateSearch = (valueNewObjSearch) => {
         this.setState({search: valueNewObjSearch})
     }
-
 
     render() {
         return (

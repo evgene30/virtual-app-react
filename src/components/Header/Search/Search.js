@@ -3,19 +3,11 @@ import React, {Component} from 'react';
 import searchImage from "../../../assets/svg/search_image.svg";
 
 class Search extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            search: "",
-        };
-    }
-
 
     headerSearch = (event) => {
         const input = event.target.value.trim()
         this.props.updateSearch(input); // забираем состояние поиска
         const newTodoList = [...this.props.TodoList];// состояние TodoList
-        const steSearch = this.props.search;
 
 
         return newTodoList.map((element) => {

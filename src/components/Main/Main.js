@@ -96,10 +96,10 @@ class Main extends Component {
                                 required
                             />
                             <button
-                                className={!this.clearInput ? "area__button button_disabled" : "area__button"}
+                                className={!this.props.text ? "area__button button_disabled" : "area__button"}
                                 id="btn"
                                 type="submit"
-                                disabled={!this.clearInput}
+                                disabled={!this.props.text}
                             >
                                 ADD
                             </button>

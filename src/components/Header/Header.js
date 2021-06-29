@@ -1,5 +1,5 @@
-import './Header.scss';
-import React, {Component} from 'react';
+import "./Header.scss";
+import React, { Component } from "react";
 import Logo from "./Logo/Logo";
 import Search from "./Search/Search";
 import Menu from "./Menu/Menu";
@@ -15,7 +15,7 @@ class Header extends Component {
         return (
             <div className="header-section">
                 <section className="header-sections__items" id="header__items">
-                    <Logo/>
+                    <Logo />
                     <Search
                         updateSearch={updateSearch}
                         search={search}

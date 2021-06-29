@@ -1,35 +1,50 @@
 import "./Menu.scss";
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 class Menu extends Component {
-
     clickChange = (event) => {
         const newTodoList = [...this.props.TodoList]; // лист элементов TodoList
-        const buttonState = [this.props.clickBut];// состояние кнопок (false)
+        let buttonState = [this.props.clickBut]; // состояние кнопок (false)
 
-
-        if (event.target.text === 'All') {
-
-
-            // return this.props.updateButtom(buttonState);
-
+        if (event.target.text === "All") {
+            buttonState = { All: true, Active: false, Done: false };
+            newTodoList.map((element) => {
+                element.visibility = true;
+            });
         }
 
+        if (event.target.text === "Active") {
+            buttonState = { All: false, Active: true, Done: false };
+            newTodoList.map((element) =>
+                element.checked
+                    ? (element.visibility = false)
+                    : (element.visibility = true)
+            );
+        }
 
-        console.log(this.props.clickBut)
-
-
+        if (event.target.text === "Done") {
+            buttonState = { All: false, Active: false, Done: true };
+            newTodoList.map((element) =>
+                !element.checked
+                    ? (element.visibility = false)
+                    : (element.visibility = true)
+            );
+        }
+        this.props.updateButtom(buttonState);
     };
 
-    valueState = (props) => {
-        if (props[0] === true) {
-            return 'nonclick active'
-
+    valueState = (item, props) => {
+        if (item === "All" && props.All) {
+            return "nonclick active";
+        } else if (item === "Active" && props.Active) {
+            return "nonclick active";
+        } else if (item === "Done" && props.Done) {
+            return "nonclick active";
         } else {
-            return 'nonclick active'
+            return "nonclick";
         }
-    }
+    };
 
     render() {
         let nameMenu = this.props.menu; // передаем пропс меню из App
@@ -44,7 +59,10 @@ class Menu extends Component {
                                 key={item.toLocaleLowerCase()}
                             >
                                 <a
-                                    className={this.valueState(this.props.clickBut)}
+                                    className={this.valueState(
+                                        item,
+                                        this.props.clickBut
+                                    )}
                                     href="#"
                                     onClick={this.clickChange}
                                 >

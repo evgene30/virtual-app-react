@@ -20,6 +20,7 @@ class Header extends Component {
                         updateSearch={updateSearch}
                         search={search}
                         TodoList={TodoList}
+                        clickBut={clickBut}
                     />
                 </section>
                 <section className="header__nav nav__menu" id="header__nav">

@@ -11,6 +11,7 @@ class App extends Component {
             clickBut: {All: true, Active: false, Done: false},
             text: "",
             TodoList: [],
+            search: "",
         };
     }
 
@@ -20,7 +21,6 @@ class App extends Component {
 
     componentDidMount() {
         const newTodoList = JSON.parse(localStorage.getItem("todoList")) || [];
-        newTodoList.map((element) => (element.visibility = true));
         this.setState({TodoList: newTodoList});
     }
 
@@ -35,32 +35,12 @@ class App extends Component {
     };
 
     updateSearch = (search) => {
-        const clickBut = this.state.clickBut;
-
-        const newTodoList = [...this.state.TodoList].map((element) => {
-            if (element.text.toLowerCase().includes(search.toLowerCase())) {
-                if (clickBut.All) {
-                    element.visibility = true;
-                }
-                if (clickBut.Active) {
-                    if (!element.checked) {
-                        element.visibility = true;
-                    }
-                }
-                if (clickBut.Done) {
-                    if (element.checked) {
-                        element.visibility = true;
-                    }
-                }
-            } else {
-                element.visibility = false;
-            }
-            return ({...element});
-        });
-        this.setState({TodoList: newTodoList});
+        // обновление состояния поля ввода поиска
+        this.setState({search: search});
     };
 
     updateButtom = (valueNewObjButtom) => {
+        // обновление состояния кнопок-фильтров
         this.setState({clickBut: valueNewObjButtom});
     };
 
@@ -80,6 +60,7 @@ class App extends Component {
                     text={this.state.text} // передаем состояние поля ввода Input
                     TodoList={this.state.TodoList} // передаем состояние TodoList
                     clickBut={this.state.clickBut} // передаем состояние отображения кнопок меню
+                    search={this.state.search}
                 />
             </div>
         );

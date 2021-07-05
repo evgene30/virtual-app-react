@@ -27,7 +27,6 @@ class Main extends Component {
             text: this.props.text, // применяем состояние из App
             checked: false,
             mark: false,
-            visibility: true,
         });
         this.props.updateState(newTodoList);
         this.clearInput.value = "";
@@ -72,7 +71,7 @@ class Main extends Component {
 
     render() {
         const clickBut = this.props.clickBut;
-        let todoList = this.props.TodoList;
+        let todoList = [...this.props.TodoList];
 
         if (clickBut.Active) {
             todoList = todoList.filter((element) => !element.checked);
@@ -81,6 +80,12 @@ class Main extends Component {
         if (clickBut.Done) {
             todoList = todoList.filter((element) => element.checked);
         }
+
+        const filtersSearchTodoList = todoList.filter((item) => {
+            // функция фильтрации значений поиска
+            return item.text.toLowerCase().includes(this.props.search.toLowerCase())
+        })
+
 
         return (
             <main className="main" id="main">
@@ -115,20 +120,18 @@ class Main extends Component {
                 </section>
                 <section className="main__task" id="main__list">
                     <ul className="main-list__items" id="todoList" tabIndex="0">
-                        {todoList.map((item) => {
-                                if (item.visibility) {
-                                    return (
-                                        <Card
-                                            stateMark={this.stateMark}
-                                            stateChecked={this.stateChecked}
-                                            handleDeleteCard={this.handleDeleteCard}
-                                            key={item.id}
-                                            info={item}
-                                        />
-                                    )
-                                }
-                            }
-                        )}
+                        {filtersSearchTodoList.map((item) => {
+                            return (
+                                <Card
+                                    stateMark={this.stateMark}
+                                    stateChecked={this.stateChecked}
+                                    handleDeleteCard={this.handleDeleteCard}
+                                    key={item.id}
+                                    info={item}
+                                />
+                            )
+                        })
+                        }
                     </ul>
                 </section>
             </main>

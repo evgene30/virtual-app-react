@@ -1,26 +1,22 @@
 import "./Header.scss";
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Logo from "./Logo/Logo";
 import Search from "./Search/Search";
-import Menu from "./Menu/Menu";
+import Menu from "./Search/Menu/Menu";
 
 class Header extends Component {
     render() {
         const menu = this.props.menu;
-        const search = this.props.search;
         const TodoList = this.props.TodoList;
         const updateSearch = this.props.updateSearch;
         const clickBut = this.props.clickBut;
-        const updateButtom = this.props.updateButtom;
+        const updateButton = this.props.updateButtom;
         return (
             <div className="header-section">
                 <section className="header-sections__items" id="header__items">
-                    <Logo />
+                    <Logo/>
                     <Search
                         updateSearch={updateSearch}
-                        search={search}
-                        TodoList={TodoList}
-                        clickBut={clickBut}
                     />
                 </section>
                 <section className="header__nav nav__menu" id="header__nav">
@@ -28,7 +24,7 @@ class Header extends Component {
                         menu={menu}
                         TodoList={TodoList}
                         clickBut={clickBut}
-                        updateButtom={updateButtom}
+                        updateButtom={updateButton}
                     />
                 </section>
             </div>

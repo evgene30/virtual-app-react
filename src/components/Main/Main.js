@@ -44,29 +44,25 @@ class Main extends Component {
 
     handleDeleteCard = (id) => {
         // удаление записи (карточки) в листе
-        const index = this.props.TodoList.findIndex((el) => el.id === id);
-
-        const newArray = [
-            ...this.props.TodoList.slice(0, index),
-            ...this.props.TodoList.slice(index + 1),
-        ];
-        this.props.updateState(newArray);
+        const newTodoList = this.props.TodoList.filter((el) => el.id !== id);
+        this.props.updateState(newTodoList);
     };
 
     stateMark = (id) => {
         // передаем выделение текста по кнопке (Mark)
         const newTodoList = [...this.props.TodoList];
-        newTodoList.forEach((element) =>
+        newTodoList.map((element) =>
             element.id === id
                 ? (element.mark = !element.mark)
                 : element.mark
         );
         this.props.updateState(newTodoList);
     };
+
     stateChecked = (id) => {
         // передаем перечеркивание текста по кнопке (Checked)
         const newTodoList = [...this.props.TodoList];
-        newTodoList.forEach((element) =>
+        newTodoList.map((element) =>
             element.id === id
                 ? (element.checked = !element.checked)
                 : element.checked
@@ -75,6 +71,17 @@ class Main extends Component {
     };
 
     render() {
+        const clickBut = this.props.clickBut;
+        let todoList = this.props.TodoList;
+
+        if (clickBut.Active) {
+            todoList = todoList.filter((element) => !element.checked);
+        }
+
+        if (clickBut.Done) {
+            todoList = todoList.filter((element) => element.checked);
+        }
+
         return (
             <main className="main" id="main">
                 <section className="main__newtask" id="main__form">
@@ -108,7 +115,7 @@ class Main extends Component {
                 </section>
                 <section className="main__task" id="main__list">
                     <ul className="main-list__items" id="todoList" tabIndex="0">
-                        {this.props.TodoList.map((item) => {
+                        {todoList.map((item) => {
                                 if (item.visibility) {
                                     return (
                                         <Card

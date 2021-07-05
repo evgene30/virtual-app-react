@@ -1,35 +1,26 @@
 import "./Menu.scss";
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
 
 class Menu extends Component {
+
+    static propTypes = {
+        nameMenu: PropTypes.arrayOf(PropTypes.string.isRequired),
+    }
+
     clickChange = (event) => {
-        const newTodoList = [...this.props.TodoList]; // лист элементов TodoList
         let buttonState = [this.props.clickBut]; // состояние кнопок (false)
 
         if (event.target.text === "All") {
-            buttonState = { All: true, Active: false, Done: false };
-            newTodoList.map((element) => {
-                element.visibility = true;
-            });
+            buttonState = {All: true, Active: false, Done: false};
         }
 
         if (event.target.text === "Active") {
-            buttonState = { All: false, Active: true, Done: false };
-            newTodoList.map((element) =>
-                element.checked
-                    ? (element.visibility = false)
-                    : (element.visibility = true)
-            );
+            buttonState = {All: false, Active: true, Done: false}
         }
 
         if (event.target.text === "Done") {
-            buttonState = { All: false, Active: false, Done: true };
-            newTodoList.map((element) =>
-                !element.checked
-                    ? (element.visibility = false)
-                    : (element.visibility = true)
-            );
+            buttonState = {All: false, Active: false, Done: true};
         }
         this.props.updateButtom(buttonState);
     };
@@ -79,6 +70,3 @@ class Menu extends Component {
 
 export default Menu;
 
-Menu.propTypes = {
-    nameMenu: PropTypes.arrayOf(PropTypes.string),
-};

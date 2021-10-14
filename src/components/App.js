@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Header from "./Header/Header";
 import Main from "./Main/Main";
 
@@ -8,7 +8,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clickBut: {All: true, Active: false, Done: false},
+            clickBut: { All: true, Active: false, Done: false },
             text: "",
             TodoList: [],
             search: "",
@@ -21,27 +21,27 @@ class App extends Component {
 
     componentDidMount() {
         const newTodoList = JSON.parse(localStorage.getItem("todoList")) || [];
-        this.setState({TodoList: newTodoList});
+        this.setState({ TodoList: newTodoList });
     }
 
     updateState = (valueNewObjState) => {
         // обновление состояния списка заданий
-        this.setState({TodoList: valueNewObjState});
+        this.setState({ TodoList: valueNewObjState });
     };
 
     updateText = (valueNewObjText) => {
         // обновление состояния поля ввода
-        this.setState({text: valueNewObjText});
+        this.setState({ text: valueNewObjText });
     };
 
     updateSearch = (search) => {
         // обновление состояния поля ввода поиска
-        this.setState({search: search});
+        this.setState({ search: search });
     };
 
     updateButtom = (valueNewObjButtom) => {
         // обновление состояния кнопок-фильтров
-        this.setState({clickBut: valueNewObjButtom});
+        this.setState({ clickBut: valueNewObjButtom });
     };
 
     render() {

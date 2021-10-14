@@ -1,18 +1,20 @@
 import "./Main.scss";
-import React, {Component} from 'react';
-import {nanoid} from "nanoid";
+import React, { Component } from "react";
+import { nanoid } from "nanoid";
 import Card from "./Cards/Card";
 
 class Main extends Component {
+    // работа с компонентом Input (формой) ввода
 
-// работа с компонентом Input (формой) ввода
-
-    inputString = (event) => { // поле ввода
+    inputString = (event) => {
+        // поле ввода
         if (event.target.value === " ") {
             // проверка на ввод пробелов
             return (event.target.value = "");
         }
-        this.props.updateText(event.target.value.trim().replace(/\s+|\n/g, " ")) // убираем лишние пробелы и
+        this.props.updateText(
+            event.target.value.trim().replace(/\s+|\n/g, " ")
+        ); // убираем лишние пробелы и
         // переносы строк, передаем в App
     };
 
@@ -32,14 +34,15 @@ class Main extends Component {
         this.clearInput.value = "";
     };
 
-    keyPress = (event) => { // ввод кнопкой текста
+    keyPress = (event) => {
+        // ввод кнопкой текста
         const code = event.keyCode || event.which;
         if (code === 13) {
             this.handleFormSubmit(event);
         }
     };
 
-// работа с компонентом карточки
+    // работа с компонентом карточки
 
     handleDeleteCard = (id) => {
         // удаление записи (карточки) в листе
@@ -51,9 +54,7 @@ class Main extends Component {
         // передаем выделение текста по кнопке (Mark)
         const newTodoList = [...this.props.TodoList];
         newTodoList.map((element) =>
-            element.id === id
-                ? (element.mark = !element.mark)
-                : element.mark
+            element.id === id ? (element.mark = !element.mark) : element.mark
         );
         this.props.updateState(newTodoList);
     };
@@ -83,9 +84,10 @@ class Main extends Component {
 
         const filtersSearchTodoList = todoList.filter((item) => {
             // функция фильтрации значений поиска
-            return item.text.toLowerCase().includes(this.props.search.toLowerCase())
-        })
-
+            return item.text
+                .toLowerCase()
+                .includes(this.props.search.toLowerCase());
+        });
 
         return (
             <main className="main" id="main">
@@ -108,7 +110,11 @@ class Main extends Component {
                                 required
                             />
                             <button
-                                className={!this.props.text ? "area__button button_disabled" : "area__button"}
+                                className={
+                                    !this.props.text
+                                        ? "area__button button_disabled"
+                                        : "area__button"
+                                }
                                 id="btn"
                                 type="submit"
                                 disabled={!this.props.text}
@@ -129,9 +135,8 @@ class Main extends Component {
                                     key={item.id}
                                     info={item}
                                 />
-                            )
-                        })
-                        }
+                            );
+                        })}
                     </ul>
                 </section>
             </main>
